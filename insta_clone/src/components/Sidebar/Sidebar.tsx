@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Avatar } from "@chakra-ui/react";
 import { Link, Link as RouterLink } from "react-router-dom";
 import {
   InstagramLogo,
