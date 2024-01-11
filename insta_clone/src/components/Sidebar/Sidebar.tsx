@@ -1,10 +1,11 @@
-import { Box, Flex, Avatar } from "@chakra-ui/react";
+import { Box, Flex, Avatar, Tooltip } from "@chakra-ui/react";
 import { Link, Link as RouterLink } from "react-router-dom";
 import {
   InstagramLogo,
   InstagramMobileLogo,
   NotificationsLogo,
   SearchLogo,
+  CreatePostLogo,
 } from "../../assets/constants";
 import { AiFillHome } from "react-icons/ai";
 const Sidebar = () => {
@@ -66,6 +67,19 @@ const Sidebar = () => {
         >
           <InstagramMobileLogo />
         </Link>
+        <Flex direction={"column"} gap={5} cursor={"pointer"}>
+          {sideBarItems.map((item, index) => (
+            <Tooltip></Tooltip>
+            // <Tooltip
+            //   key={index}
+            //   hasArrow
+            //   label={item.text}
+            //   placement="right"
+            //   marginLeft={1}
+            //   openDelay={500}
+            // ></Tooltip>
+          ))}
+        </Flex>
       </Flex>
     </Box>
   );
