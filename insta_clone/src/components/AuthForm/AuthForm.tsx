@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Login from "./Login"
-import SignUp from "./SignUp";
+import Signup from "./Signup";
 import GoogleAuth from "./GoogleAuth";
 
 const AuthForm = () => {
@@ -19,7 +19,7 @@ const AuthForm = () => {
       <Box border={"1px solid gray"} borderRadius={4} padding={5}>
         <VStack spacing={4}>
           <Image src="/logo.png" h={24} alt="Instagram logo" />
-          {isLogin? <Login /> : <SignUp/>}
+          {isLogin? <Login /> : <Signup/>}
           {/* ----------------OR-------------------- */}
           <Flex
             alignItems={"center"}
