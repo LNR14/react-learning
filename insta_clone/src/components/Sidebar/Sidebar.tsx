@@ -10,6 +10,7 @@ import {
 import { CiSettings } from "react-icons/ci";
 import { AiFillHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
+import useLogout from "../../hooks/useLogout";
 const Sidebar = () => {
   const sideBarItems = [
     {
@@ -40,6 +41,7 @@ const Sidebar = () => {
       link: "/test",
     },
   ];
+   const {handleLogout,isLoggingOut,error} = useLogout()
   return (
     <Box
       height={"100vh"}
@@ -110,9 +112,8 @@ const Sidebar = () => {
           openDelay={500}
           display={{ base: "block", md: "none" }}
         >
-          <Link
-            display={"flex"}
-            to={"/auth"}
+          <Flex
+            onClick={handleLogout}
             alignItems={"center"}
             gap={4}
             _hover={{ bg: "whiteAlpha.400" }}
@@ -124,7 +125,7 @@ const Sidebar = () => {
           >
             <BiLogOut size={25} />
             <Box display={{ base: "none", md: "block" }}>logout</Box>
-          </Link>
+          </Flex>
         </Tooltip>
       </Flex>
     </Box>

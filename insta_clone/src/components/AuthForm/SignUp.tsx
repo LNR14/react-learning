@@ -12,7 +12,6 @@ const Signup = () => {
   });
   const [showPassword,setShowPassword] =useState(false)
   const { loading,error,signup }=useSignUpWithEmailAndPassword();
-  console.log(loading,error,signup)
   return (
     <>
       <Input
