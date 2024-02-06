@@ -8,11 +8,11 @@ const Signup = () => {
     fullName:"",
     username:"",
     email: "",
-    password: ""
+    password: "",
   });
   const [showPassword,setShowPassword] =useState(false)
-  const { loading ,error ,signup }=useSignUpWithEmailAndPassword();
-  const signup = () => useSignUpWithEmailAndPassword()
+  const { loading,error,signup }=useSignUpWithEmailAndPassword();
+  console.log(loading,error,signup)
   return (
     <>
       <Input
@@ -71,9 +71,9 @@ const Signup = () => {
             isLoading={loading}
             onClick={() =>signup(inputs)}
           >
-            Sign up
+            Sign Up
           </Button>
-  
+
     </>
   )
 }

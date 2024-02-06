@@ -45,7 +45,7 @@ const useSignUpWithEmailAndPassword = () => {
 
     }
   }
-  return (loading,error,signup)
+  return {loading,error,signup}
 }
 
 export default useSignUpWithEmailAndPassword
