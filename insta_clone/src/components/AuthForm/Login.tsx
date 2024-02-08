@@ -35,6 +35,7 @@ const Login = () => {
 
     </Button>
   </InputRightElement>
+  </InputGroup>
             <Button
             w={"full"}
             colorScheme="blue"
@@ -43,7 +44,6 @@ const Login = () => {
           >
             Login
           </Button>
-          </InputGroup>
   </>
   )
 }
