@@ -9,7 +9,7 @@ import {
 } from "../../assets/constants";
 import { CiSettings } from "react-icons/ci";
 import { AiFillHome } from "react-icons/ai";
-import { BiGhost, BiLogOut } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import useLogout from "../../hooks/useLogout";
 const Sidebar = () => {
   const sideBarItems = [
