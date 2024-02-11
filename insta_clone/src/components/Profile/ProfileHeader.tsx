@@ -6,7 +6,10 @@ import {
   VStack,
   Button,
 } from "@chakra-ui/react";
+import useUserProfileStore from "../../store/userProfileStore"
 const ProfileHeader = () => {
+  const {userProfile} = useUserProfileStore()
+
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -22,7 +25,7 @@ const ProfileHeader = () => {
         <Avatar
           size="2xl"
           name="Segun Adebayo"
-          src="https://bit.ly/sage-adebayo"
+          src={userProfile.profilePicURL}
         />
       </AvatarGroup>
       <VStack alignItems={"start"} gap={2} mx={"auto"} flex={1}>
@@ -33,7 +36,7 @@ const ProfileHeader = () => {
           alignItems={"center"}
           w={"full"}
         >
-          <Text fontSize={{ base: "sm", md: "lg" }}>As a programmer _ </Text>
+          <Text fontSize={{ base: "sm", md: "lg" }}>{userProfile.username} </Text>
           <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
             <Button
               bg={"white"}
@@ -53,7 +56,7 @@ const ProfileHeader = () => {
               fontWeight={"bold"}
               mr={1}
             >
-              4
+              {userProfile.posts.length}
             </Text>
             Posts
           </Text>
@@ -64,7 +67,7 @@ const ProfileHeader = () => {
               fontSize={{ base: "xs", md: "sm" }}
               mr={1}
             >
-              149
+              {userProfile.followers.length}
             </Text>
             Followers
           </Text>
@@ -75,18 +78,18 @@ const ProfileHeader = () => {
               fontSize={{ base: "xs", md: "sm" }}
               mr={1}
             >
-              175
+              {userProfile.following.length}
             </Text>
             Following
           </Text>
         </Flex>
         <Flex alignItems={"center"} gap={4} direction={"column"}>
           <Text fontSize={"sm"} fontWeight={"bold"}>
-            As a programmer
+            {userProfile.fullname}
           </Text>
         </Flex>
         <Text fontSize={"sm"}>
-          Tutrials that are meant to level up your skills as a programmer
+          {userProfile.bio}
         </Text>
       </VStack>
     </Flex>
