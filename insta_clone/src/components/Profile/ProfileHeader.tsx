@@ -5,10 +5,18 @@ import {
   Text,
   VStack,
   Button,
+  useDisclosure
 } from "@chakra-ui/react";
+import EditProfile from "./EditProfile";
 import useUserProfileStore from "../../store/userProfileStore"
+import useAuthStore from "../../store/authStore"
+
 const ProfileHeader = () => {
   const {userProfile} = useUserProfileStore()
+  const authUser = useAuthStore((state) => state.user)
+  const visitingOwnProfileAndAuthenticated = authUser && authUser.username === userProfile.username
+  const visitingAnotherProfileAndAuth = authUser && authUser.username !== userProfile.username
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Flex
@@ -37,16 +45,32 @@ const ProfileHeader = () => {
           w={"full"}
         >
           <Text fontSize={{ base: "sm", md: "lg" }}>{userProfile.username} </Text>
+          {visitingOwnProfileAndAuthenticated &&           
           <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
             <Button
               bg={"white"}
               color={"black"}
               _hover={{ bg: "white.Alpha.800" }}
               size={{ base: "xs", md: "sm" }}
+              onClick={onOpen}
             >
               Edit Profile
             </Button>
-          </Flex>
+          </Flex>}
+
+          {visitingAnotherProfileAndAuth &&           
+          <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+            <Button
+              bg={"blue.400"}
+              color={"white"}
+              _hover={{ bg: "blue.600" }}
+              size={{ base: "xs", md: "sm" }}
+            >
+              Follow
+            </Button>
+          </Flex>}
+
+
         </Flex>
         <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
           <Text>
@@ -92,6 +116,7 @@ const ProfileHeader = () => {
           {userProfile.bio}
         </Text>
       </VStack>
+      {isOpen && <EditProfile isOpen={isOpen} onClose={onClose}/>}
     </Flex>
   );
 };
