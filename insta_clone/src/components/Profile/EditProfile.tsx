@@ -22,7 +22,7 @@ import useShowToast from "../../hooks/useShowToast";
 // import useEditProfile from "../../hooks/useEditProfile";
 // import useShowToast from "../../hooks/useShowToast";
 
-const showToast = useShowToast();
+// const showToast = useShowToast();
 const EditProfile = ({ isOpen, onClose }) => {
     const [inputs,setInputs] = useState({
         fullName:"",
@@ -35,7 +35,8 @@ const EditProfile = ({ isOpen, onClose }) => {
             console.log(inputs)
 
         }catch(error){
-            showToast("Error",error.message,"error")
+            // showToast("Error",error.message,"error")
+            console.log(error)
         }
     }
 	// const authUser = useAuthStore((state) => state.user);
@@ -78,7 +79,8 @@ const EditProfile = ({ isOpen, onClose }) => {
 											/>
 										</Center>
 										<Center w='full'>
-											<Button w='full' onClick={() => fileRef.current.click()}>
+											<Button w='full' >
+                                            {/* onClick={() => fileRef.current.click()}> */}
 												Edit Profile Picture
 											</Button>
 										</Center>
