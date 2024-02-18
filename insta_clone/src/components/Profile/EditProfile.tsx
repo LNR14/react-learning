@@ -17,43 +17,33 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import useShowToast from "../../hooks/useShowToast";
-// import useAuthStore from "../../store/authStore";
-// import usePreviewImg from "../../hooks/usePreviewImg";
-// import useEditProfile from "../../hooks/useEditProfile";
-// import useShowToast from "../../hooks/useShowToast";
+import useAuthStore from "../../store/authStore";
+import usePreviewImg from "../../hooks/usePreviewImg";
+import useEditProfile from "../../hooks/useEditProfile";
 
-// const showToast = useShowToast();
+
 const EditProfile = ({ isOpen, onClose }) => {
     const [inputs,setInputs] = useState({
-        fullName:"",
+        fullname:"",
         username:"",
         bio:""
     })
+	const showToast = useShowToast();
+	const authUser = useAuthStore((state) => state.user);
+	const fileRef = useRef(null)
+	const { handleImageChange, selectedFile,setSelectedFile} = usePreviewImg();
+	const {isUpdating,editProfile} = useEditProfile();
 
-    const handleEditProfile = async () =>{
-        try{
-            console.log(inputs)
-
-        }catch(error){
-            // showToast("Error",error.message,"error")
-            console.log(error)
-        }
-    }
-	// const authUser = useAuthStore((state) => state.user);
-	// const fileRef = useRef(null);
-	// const { handleImageChange, selectedFile, setSelectedFile } = usePreviewImg();
-	// const { isUpdating, editProfile } = useEditProfile();
-	// const showToast = useShowToast();
-
-	// const handleEditProfile = async () => {
-	// 	try {
-	// 		await editProfile(inputs, selectedFile);
-	// 		setSelectedFile(null);
-	// 		onClose();
-	// 	} catch (error) {
-	// 		showToast("Error", error.message, "error");
-	// 	}
-	// };
+	const handleEditProfile = async () => {
+		try {
+			await editProfile(inputs,selectedFile);
+			setSelectedFile(null)
+			onClose();
+			
+		}catch(error){
+			showToast("Error",error.message,"error")
+		}
+	}
 
 	return (
 		<>
@@ -74,17 +64,18 @@ const EditProfile = ({ isOpen, onClose }) => {
 										<Center>
 											<Avatar
 												size='xl'
-												// src={selectedFile || authUser.profilePicURL}
+												src={selectedFile || authUser.profilePicURL}
 												border={"2px solid white "}
 											/>
 										</Center>
 										<Center w='full'>
-											<Button w='full' >
-                                            {/* onClick={() => fileRef.current.click()}> */}
+											<Button w='full' 
+												onClick={() => fileRef.current.click()}
+											>
 												Edit Profile Picture
 											</Button>
 										</Center>
-										{/* <Input type='file' hidden ref={fileRef} onChange={handleImageChange} /> */}
+										<Input type="file" hidden ref ={fileRef} onChange={handleImageChange}/>
 									</Stack>
 								</FormControl>
 
@@ -94,8 +85,8 @@ const EditProfile = ({ isOpen, onClose }) => {
 										placeholder={"Full Name"}
 										size={"sm"}
 										type={"text"}
-										value={inputs.fullName}
-										onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
+										value={inputs.fullname || authUser.fullname}
+										onChange={(e) => setInputs({ ...inputs, fullname: e.target.value })}
 									/>
 								</FormControl>
 
@@ -105,7 +96,7 @@ const EditProfile = ({ isOpen, onClose }) => {
 										placeholder={"Username"}
 										size={"sm"}
 										type={"text"}
-										value={inputs.username}
+										value={inputs.username || authUser.username}
 										onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
 									/>
 								</FormControl>
@@ -116,7 +107,7 @@ const EditProfile = ({ isOpen, onClose }) => {
 										placeholder={"Bio"}
 										size={"sm"}
 										type={"text"}
-										value={inputs.bio}
+										value={inputs.bio || authUser.bio}
 										onChange={(e) => setInputs({ ...inputs, bio: e.target.value })}
 									/>
 								</FormControl>
@@ -139,7 +130,7 @@ const EditProfile = ({ isOpen, onClose }) => {
 										w='full'
 										_hover={{ bg: "blue.500" }}
 										onClick={handleEditProfile}
-										// isLoading={isUpdating}
+										isLoading={isUpdating}
 									>
 										Submit
 									</Button>
