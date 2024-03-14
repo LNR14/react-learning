@@ -3,44 +3,12 @@ import { Link, Link as RouterLink } from "react-router-dom";
 import {
   InstagramLogo,
   InstagramMobileLogo,
-  NotificationsLogo,
-  SearchLogo,
-  CreatePostLogo,
 } from "../../assets/constants";
-import { CiSettings } from "react-icons/ci";
-import { AiFillHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import useLogout from "../../hooks/useLogout";
+import SidebarItems from "./SidebarItems";
 const Sidebar = () => {
-  const sideBarItems = [
-    {
-      icon: <AiFillHome size={25} />,
-      text: "Home",
-      link: "/",
-    },
-    {
-      icon: <SearchLogo />,
-      text: "Search",
-    },
-    {
-      icon: <NotificationsLogo />,
-      text: "Notifications",
-    },
-    {
-      icon: <CreatePostLogo />,
-      text: "Create",
-    },
-    {
-      icon: <Avatar size={"sm"} name="Burak Orkmez" src="./profilepic.png" />,
-      text: "Profile",
-      link: "/asaprgrammer",
-    },
-    {
-      icon: <CiSettings />,
-      text: "testing",
-      link: "/test",
-    },
-  ];
+ 
    const {handleLogout,isLoggingOut} = useLogout()
   return (
     <Box
@@ -56,8 +24,8 @@ const Sidebar = () => {
       <Flex direction={"column"}>
         <Link
           to={"/"}
-          p1={2}
-          display={{ base: "none", md: "block" }}
+          pl={2}
+          display={{ base: "block", md: "none" }}
           cursor="pointer"
         >
           <InstagramLogo />
@@ -66,7 +34,7 @@ const Sidebar = () => {
           to={"/"}
           as={RouterLink}
           p={2}
-          display={{ base: "block", md: "none" }}
+          display={{ base: "none", md: "block" }}
           cursor="pointer"
           borderRadius={6}
           _hover={{
@@ -77,32 +45,8 @@ const Sidebar = () => {
           <InstagramMobileLogo />
         </Link>
         <Flex direction={"column"} gap={5} cursor={"pointer"}>
-          {sideBarItems.map((item, index) => (
-            <div key={index} display={{ base: "block", md: "none" }}>
-              <Link
-                display={"flex"}
-                to={item.link || null}
-                alignItems={"center"}
-                gap={4}
-                _hover={{ bg: "whiteAlpha.400" }}
-                borderRadius={6}
-                p={2}
-                w={{ base: 10, md: "full" }}
-                justifyContent={{ base: "center", md: "flex-start" }}
-              >
-                {item.icon}
-                {item.text}
-              </Link>
-            </div>
-            // <Tooltip
-            //   key={index}
-            //   hasArrow
-            //   label={item.text}
-            //   placement="right"
-            //   marginLeft={1}
-            //   openDelay={500}
-            // ></Tooltip>
-          ))}
+          <SidebarItems />
+            
         </Flex>
         <Tooltip
           hasArrow
