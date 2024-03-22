@@ -61,7 +61,7 @@ const ProfileHeader = () => {
           </Flex>}
 
           {visitingAnotherProfileAndAuth &&           
-          <Flex gap={4} alignItems={"center"} justifyContent={"center"}>w white
+          <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
             <Button
               bg={"blue.400"}
               color={"white"}
