@@ -3,10 +3,9 @@ import {create} from "zustand"
 const usePostStore = create((set) => ({
     posts:[],
     createPost:(post) => set(state => ({ posts :[post, ...state.posts]})),
-    addPost:(post) => set(state => ({
-        userProfileState:{...state.userProfile, posts:[post.id,...state.userProfile.posts]}
-    }))
-    //deletePost
+    setPosts: (posts) => set({posts}),
+    deletePost:(id) => set(state => ({posts:state.posts.filter(post => post.id !== id)}))
+
     //addComment
     //setPosts
 }))

@@ -7,7 +7,20 @@ const useUserProfileStore = create((set) => ({
         set((state) => ({
             userProfile:{...state.userProfile, posts: [post.id, ...state.userProfile.posts]}
         }))
-    }
+    },
+    decrementPostsCount : (postId) => set((state) => ({
+        userProfile:{
+            ...state.userProfile,
+            posts:state.userProfile.posts.filter((id) => id !== postId)
+        }
+    })),
+
+    // deletePost: (postId) => set((state) =>({
+    //     userProfile:{
+    //         ...state.userProfile,
+    //         posts:state.userProfile.posts.filter((id) => id !== postId)
+    //     }
+    // }))
 }))
 
 export default useUserProfileStore;
