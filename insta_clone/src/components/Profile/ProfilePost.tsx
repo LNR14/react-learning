@@ -28,6 +28,7 @@ import useUserProfileStore from "../../store/userProfileStore"
 import useAuthStore from "../../store/authStore"
 import usePostStore from "../../store/postStore"
 import useShowToast from "../../hooks/useShowToast";
+import Caption from "../Comments/Caption";
 
 
 const ProfilePost = ({ post }) => {
@@ -176,6 +177,10 @@ const ProfilePost = ({ post }) => {
                   maxH={"350px"}
                   overflowY={"auto"}
                 >
+
+                  {/* Caption */}
+                  {post.caption && <Caption post={post} />}
+                  {/* Comments */}
                   {post.comments.map(comment =>(
                     <Comment comment = {comment} />
                   ))}
