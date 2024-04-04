@@ -5,19 +5,19 @@ import {
   Flex,
   Skeleton,
   Box,
+  Text
 } from "@chakra-ui/react";
 import FeedPost from "./FeedPost";
 import { useState, useEffect } from "react";
+import useGetFeedPosts from "../../hooks/useGetFeedPosts";
 
 const FeedPosts = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000);
-  }, []);
+  const {isLoading,posts} = useGetFeedPosts()
+
   return (
     <Container maxW={"container.sm"} py={10} px={2}>
       {isLoading &&
-        [0, 1, 2, 3].map((_, idx) => (
+        [0, 1, 2].map((_, idx) => (
           <>
             <VStack key={idx} gap={4} alignItems={"flex-Start"} mb={10}>
               <Flex gap={2}>
@@ -34,12 +34,14 @@ const FeedPosts = () => {
           </>
         ))}
 
-      {!isLoading && (
+      {!isLoading && posts.length > 0 && posts.map((post) => 
+        <FeedPost key= {post.id} post={post}/>
+      )}
+      {!isLoading && posts.length === 0 && (
         <>
-          <FeedPost username="Morgan" img="/img1.png" avatar="/img1.png" />
-          <FeedPost username="DeBruyne" img="/img2.png" avatar="/img2.png" />
-          <FeedPost username="Popp" img="/img3.png" avatar="/img3.png" />
-          <FeedPost username="MoSalah" img="/img4.png" avatar="/img4.png" />
+          <Text fontSize={"md"} color={"red.400"}>
+            Dayum. Looks like you don't follow anyone. Please go ahead and follow someone.
+          </Text>
         </>
       )}
     </Container>
